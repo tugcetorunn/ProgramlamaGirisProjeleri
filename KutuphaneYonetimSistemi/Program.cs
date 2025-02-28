@@ -23,7 +23,15 @@ namespace KutuphaneYonetimSistemi
 
             // kitaplar generate
 
+            //int rafSayisi = 0;
+            KitaplariListeyeAta();
+            RafOlustur();
+            //rafSayisi = _rafSayisi;
+
+            
+            KitaplariRaflaraYerlestir();
             KiralanabilirKitaplarListesi();
+            // yeni kitap eklendiğinde random yerleştir.
 
             GirisMenu();
             IslemMenu();
@@ -69,9 +77,10 @@ namespace KutuphaneYonetimSistemi
             {
                 case "1":
                     KitapKirala();
+                    UcretHesapla();
                     break;
                 case "2":
-                    KitapTeslimEt();
+                    KitapTeslimEt(); // kiraladığı kitaplar gelsin.
                     break;
                 case "3":
                     KitapBagisla();
@@ -94,6 +103,11 @@ namespace KutuphaneYonetimSistemi
                     Console.WriteLine("Geçersiz seçim yaptınız.");
                     return;
             }
+        }
+
+        private static void UcretHesapla()
+        {
+            throw new NotImplementedException();
         }
 
         // todo: kişiler 10 tane random gelsin
@@ -122,8 +136,104 @@ namespace KutuphaneYonetimSistemi
             }
         }
 
-        static Dictionary<string, Dictionary<string, string>> rafBazliKitaplar = new Dictionary<string, Dictionary<string, string>>(); // rafIsimleri - dict<> kitaplarYazarlar
+        //static string[,] raflar; // {{"A1", "A2"},{"B1", "B2"}}
+        static List<string> raflar = new List<string>(); // {"A1", "A5",..., "Z1", "Z5"}
+        //static Dictionary<string, string> harfBazliKitaplar = new Dictionary<string, string>();
+        private static void RafOlustur()
+        {
+
+            for (char i = 'A'; i <= 'Z'; i++)
+            {
+                for (int j = 0; j < 5; j++)
+                {
+                    raflar.Add(i.ToString() + (j + 1));
+                }
+
+                //foreach (var kitap in kitaplarYazarlar)
+                //{
+                //    if (kitap.Key.StartsWith(i))
+                //    {
+                //        harfBazliKitaplar.Add(kitap.Key, kitap.Value);
+                //    }
+                //}
+            }
+
+            //foreach (var raf in raflar)
+            //{
+            //    Console.WriteLine(raf);
+            //}
+        }
+
         static Dictionary<string, string> kitaplarYazarlar = new Dictionary<string, string>();
+        static Dictionary<string, List<KeyValuePair<string, string>>> rafBazliKitaplar = new Dictionary<string, List<KeyValuePair<string, string>>>(); // rafIsimleri - dict<> kitaplarYazarlar
+        static Random random = new Random();
+        private static void KitaplariRaflaraYerlestir()
+        {
+            List<string> kullanilanRaflar = new List<string>();
+
+            foreach (var kitap in kitaplarYazarlar)
+            {
+                string randomRaf;
+
+                if (kullanilanRaflar.Count == raflar.Count)
+                {
+                    randomRaf = rafBazliKitaplar.OrderBy(r => r.Value.Count).First().Key;
+                }
+                else
+                {
+                    do
+                    {
+                        randomRaf = raflar[random.Next(raflar.Count)];
+                    } while (kullanilanRaflar.Contains(randomRaf) && kullanilanRaflar.Count < raflar.Count);
+
+                    if (!kullanilanRaflar.Contains(randomRaf))
+                    {
+                        kullanilanRaflar.Add(randomRaf);
+                    }
+                }
+
+                if (!rafBazliKitaplar.ContainsKey(randomRaf))
+                {
+                    var rafIcindekiler = rafBazliKitaplar[randomRaf];
+                    rafIcindekiler.Add(kitap);
+                    //var value = new List<KeyValuePair<string, string>>();
+                    //value.Add(kitap);
+                    //rafBazliKitaplar.Add(randomRaf, value);
+                }
+            }
+        }
+
+        private static void KitaplariListeyeAta()
+        {
+            kitaplarYazarlar.Add("Suç ve Ceza", "Fyodor Dostoyevski");
+            kitaplarYazarlar.Add("1984", "George Orwell");
+            kitaplarYazarlar.Add("Büyük Umutlar", "Charles Dickens");
+            kitaplarYazarlar.Add("Gurur ve Önyargı", "Jane Austen");
+            kitaplarYazarlar.Add("Sefiller", "Victor Hugo");
+            kitaplarYazarlar.Add("Don Kişot", "Miguel de Cervantes");
+            kitaplarYazarlar.Add("Dönüşüm", "Franz Kafka");
+            kitaplarYazarlar.Add("Harry Potter Serisi", "J.K. Rowling");
+            kitaplarYazarlar.Add("Yüzüklerin Efendisi", "J.R.R. Tolkien");
+            kitaplarYazarlar.Add("Game of Thrones (Buz ve Ateşin Şarkısı Serisi)", "George R.R. Martin");
+            kitaplarYazarlar.Add("Açlık Oyunları", "Suzanne Collins");
+            kitaplarYazarlar.Add("Kafes", "Josh Malerman");
+            kitaplarYazarlar.Add("Beni Asla Bırakma", "Kazuo Ishiguro");
+            kitaplarYazarlar.Add("Yeraltı Demiryolu", "Colson Whitehead");
+            kitaplarYazarlar.Add("Kürk Mantolu Madonna", "Sabahattin Ali");
+            kitaplarYazarlar.Add("Tutunamayanlar", "Oğuz Atay");
+            kitaplarYazarlar.Add("Saatleri Ayarlama Enstitüsü", "Ahmet Hamdi Tanpınar");
+            kitaplarYazarlar.Add("Şu Çılgın Türkler", "Turgut Özakman");
+            kitaplarYazarlar.Add("İnce Mehmed", "Yaşar Kemal");
+            kitaplarYazarlar.Add("Huzur", "Ahmet Hamdi Tanpınar");
+            kitaplarYazarlar.Add("Aşk", "Elif Şafak");
+            kitaplarYazarlar.Add("Atomik Alışkanlıklar", "James Clear");
+            kitaplarYazarlar.Add("İnsanın Anlam Arayışı", "Viktor E. Frankl");
+            kitaplarYazarlar.Add("Bilinçaltının Gücü", "Joseph Murphy");
+            kitaplarYazarlar.Add("Düşün ve Zengin Ol", "Napoleon Hill");
+            kitaplarYazarlar.Add("Akıllı Yatırımcı", "Benjamin Graham");
+
+        }
+
         private static void TumKitapListesi()
         {
             Console.WriteLine("Tüm Kitap Hazinemiz: ");
@@ -157,11 +267,10 @@ namespace KutuphaneYonetimSistemi
         private static void KiralanabilirKitaplarListesi()
         {
             var tumKitaplarValues = rafBazliKitaplar.Values.ToList(); // ToDictionary(new Dictionary<string, string>())
-            var tumKitaplarKeys = rafBazliKitaplar.Keys.ToList();
 
-            for (int i = 0; i < rafBazliKitaplar.Count; i++)
+            for (int i = 0; i < 3; i++)
             {
-                kiralanabilirKitaplar.Add(tumKitaplarKeys[i], tumKitaplarValues[i]);
+                //kiralanabilirKitaplar.Add(raflar[], tumKitaplarValues[i]);
             }
         }
         private static void KayitOl()

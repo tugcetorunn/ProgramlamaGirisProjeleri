@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34607.119
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KutuphaneYonetimSistemi", "KutuphaneYonetimSistemi\KutuphaneYonetimSistemi.csproj", "{835CC8EF-55F3-4D72-A6E6-DD2FED2395E8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KutuphaneYonetimSistemi", "KutuphaneYonetimSistemi\KutuphaneYonetimSistemi.csproj", "{835CC8EF-55F3-4D72-A6E6-DD2FED2395E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasitKutuphaneYonetimSistemi", "BasitKutuphaneYonetimSistemi\BasitKutuphaneYonetimSistemi.csproj", "{D0B60AA9-BA95-4491-90E3-6C7E373C6FD6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{835CC8EF-55F3-4D72-A6E6-DD2FED2395E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{835CC8EF-55F3-4D72-A6E6-DD2FED2395E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{835CC8EF-55F3-4D72-A6E6-DD2FED2395E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0B60AA9-BA95-4491-90E3-6C7E373C6FD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0B60AA9-BA95-4491-90E3-6C7E373C6FD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0B60AA9-BA95-4491-90E3-6C7E373C6FD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0B60AA9-BA95-4491-90E3-6C7E373C6FD6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
